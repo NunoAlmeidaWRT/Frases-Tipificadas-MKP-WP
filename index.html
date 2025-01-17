@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frases Tipificadas Marketplace Worten Peças</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frases Tipificadas Marketplace Worten Peças</h1>
+    <label for="frases">Escolha uma frase:</label>
+    <select id="frases" onchange="mostrarFrase()">
+        <option value="">Selecione...</option>
+        <option value="atraso">Atraso da encomenda</option>
+        <option value="comp-negativa">Compatibilidade negativa</option>
+        <option value="previsao">Previsão de entrega</option>
+        <option value="comp-positiva">Resposta compatibilidade positiva</option>
+        <option value="danificada">Encomenda entregue danificada</option>
+        <option value="devolucao">Pedido de devolução encomenda</option>
+        <option value="expedida">Encomenda expedida</option>
+        <option value="esgotada">Encomenda esgotada/descontinuado</option>
+        <option value="fatura-envio">Solicitação de fatura antes de envio</option>
+        <option value="recolha">Recolha Agendada</option>
+        <option value="prazo">Cliente solicita prazo de entrega</option>
+        <option value="cancelamento">Cliente solicita cancelamento antes de envio</option>
+        <option value="orientacoes">Orientações para indicação de modelo</option>
+        <option value="fatura-pos">Pedidos fatura após envio</option>
+        <option value="tracking">Falha comunicação tracking</option>
+        <option value="finalizado">Agradecimento ao cliente pelo feedback</option>
+        <option value="nota-credito">Solicitação via Email Emissão Nota de crédito a DGA</option>
+        <option value="link-resposta">Envio link resposta a solicitação de peça</option>
+    </select>
+    <textarea id="texto" readonly></textarea>
+    <button onclick="copiarTexto()">Copiar Frase</button>
+
+    <script>
+        const frases = {
+            "atraso": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Infelizmente a sua encomenda sofreu um atraso para além do esperado devido a rutura de stock do artigo no fabricante, contudo temos indicação que essa rutura já se encontrará solucionada tendo uma previsão estimada de entrega entre x a x de xxxxx na morada indicada.
+
+Agradecemos a sua compreensão e pedimos desculpa por qualquer transtorno causado devido a este atraso.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "comp-negativa": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Informamos que o artigo não é compatível com o seu modelo de equipamento, nem dispomos de alternativa para o mesmo.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "previsao": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+A previsão estimada de entrega da sua encomenda será entre x a x de xxxxx.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "comp-positiva": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Informamos que o acessório é compatível com o seu equipamento.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "danificada": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Lamentamos profundamente o ocorrido com a entrega da sua encomenda. Entendemos a frustração da situação e estamos a tratar deste assunto com a máxima prioridade.
+
+Já iniciámos o processo para o envio de uma nova unidade, sem qualquer custo adicional para si. Adicionalmente, vamos proceder com a devida reclamação junto da transportadora para garantir que este tipo de situação não se volte a repetir.
+
+Agradecemos a sua compreensão e pedimos desculpa pelos transtornos causados.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "devolucao": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Informamos que já iniciamos o processo de reembolso. 
+Poderá devolver o artigo numa das nossas lojas Worten. Em alternativa, poderá enviar o artigo para o nosso armazém logístico na seguinte morada:
+
+Satfiel SFU
+Rua Central de S. Martinho, 2990
+4560-805 Penafiel
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "expedida": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Informamos que a sua encomenda foi expedida hoje, pelo que deverá ser entregue nas próximas 24h a 48h.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "esgotada": `Estimado(a) cliente,
+
+Esperamos que se encontre bem.
+
+Entramos em contacto para informar que o artigo da sua encomenda foi descontinuado pelo fabricante, não sendo mais possível o seu fornecimento.
+
+Iremos proceder ao reembolso total do valor pago pela sua encomenda.
+
+Agradecemos a sua compreensão e pedimos desculpa pelo transtorno causado.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "fatura-envio": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Informamos que a fatura será automaticamente emitida, assim que o processamento de envio da sua encomenda for realizado.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "recolha": `Estimado(a) cliente,
+
+Informamos que foi agendada a recolha do pedido xxxxxx, com a transportadora XXX, para o dia xxx, tendo sido gerado o número de tracking xxxxx
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "prazo": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Lamentamos a demora no envio da sua encomenda, no entanto conforme é apresentado na página do artigo, o mesmo não está disponível para entrega imediata, tendo uma previsão de 3 semanas para entrega. Estando a aguardar chegada vinda do fabricante.
+
+Tendo em conta a data da sua encomenda, estimamos que a mesma seja entregue xxx
+
+Uma vez mais lamentamos a demora neste processo, agradecendo também toda sua compreensão.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "cancelamento": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Informamos que já procedemos ao cancelamento da sua encomenda, assim como o reembolso da mesma.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "orientacoes": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Para que possamos ajudar, necessitamos obrigatoriamente de saber o modelo completo do seu equipamento, que consta na etiqueta de características.
+
+Se preferir, poderá entrar em chat pelo nosso portal inteiramente dedicado ao fornecimento de acessórios, na seguinte página https://acessorios.worten.pt/
+Neste site poderá enviar a foto da etiqueta de características pelo serviço de chat, sendo atendida por um assistente nesse mesmo momento, que a encaminhará para a página do artigo que pretende.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "fatura-pos": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Informamos que a fatura já está disponível na página do seu pedido. Contudo, anexamos uma cópia também nesta mensagem para sua conveniência.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "tracking": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Lamentamos a demora no envio da sua encomenda, no entanto o mesmo foi expedido no dia xx  de xxx, estando neste momento em distribuição nos CTT.
+Infelizmente devido a uma falha informática, a comunicação do envio não refletiu no seu pedido no momento da expedição com a informação do tracking.
+
+Contudo neste momento o seu pedido já consta com informação de tracking ativa.
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "finalizado": `Estimado(a) cliente,
+
+Agradecemos o seu feedback, assim como a confiança depositada nos nossos serviços.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`,
+            "nota-credito": `(Enviar email para dga@satfiel.com)
+Titulo de Assunto: Pedido de Devolução Encomenda Marketplace Worten Nº
+
+Bom dia,
+ 
+Solicito a emissão de uma nota de crédito para a seguinte encomenda:
+ 
+Nome cliente: 
+Canal: Marketplace Worten
+Pedido: 
+Cód. Peça(s): 
+Motivo: 
+IBAN: Marketplace
+Valor: €
+ 
+Agradeço desde já a atenção e fico a aguardar confirmação.`,
+"link-resposta": `Estimado(a) cliente,
+
+Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
+
+Segue abaixo o link para que possa verificar o preço e previsão de entrega do artigo que solicita:
+
+Colocar link
+
+Estamos à disposição para qualquer esclarecimento adicional.
+
+Com os melhores cumprimentos,
+A Equipa Worten Peças`
+
+        };
+
+        function mostrarFrase() {
+            const select = document.getElementById("frases");
+            const texto = document.getElementById("texto");
+            const valorSelecionado = select.value;
+            texto.value = frases[valorSelecionado] || "";
+        }
+
+        function copiarTexto() {
+            const texto = document.getElementById("texto");
+            texto.select();
+            texto.setSelectionRange(0, 99999); // Para dispositivos móveis
+            navigator.clipboard.writeText(texto.value).then(() => {
+                alert("Texto copiado com sucesso!");
+            }).catch(() => {
+                alert("Erro ao copiar o texto. Por favor, tente novamente.");
+            });
+        }
+    </script>
+</body>
+</html>
