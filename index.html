@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frases Tipificadas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 200px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frases Tipificadas</h1>
+    <label for="frases">Escolha uma frase:</label>
+    <select id="frases" onchange="mostrarFrase()">
+        <option value="">Selecione...</option>
+    </select>
+    <textarea id="texto" readonly></textarea>
+    <button onclick="copiarTexto()">Copiar Frase</button>
+
+    <script>
+        const apiUrl = "https://script.google.com/macros/s/AKfycbx4VuGnB3J6VmhRKk2yh3GA4-1W13fihsaLG6tpKHrMYJ7-MFp6PLfnE97ZDbNz35NwJQ/exec"; // Cole a URL da API aqui
+
+        // Busca as frases da API
+        async function carregarFrases() {
+            const response = await fetch(apiUrl);
+            const frases = await response.json();
+            const select = document.getElementById("frases");
+
+            frases.forEach(frase => {
+                const option = document.createElement("option");
+                option.value = frase.mensagem;
+                option.textContent = frase.tipo;
+                select.appendChild(option);
+            });
+        }
+
+        // Exibe a frase selecionada
+        function mostrarFrase() {
+            const select = document.getElementById("frases");
+            const texto = document.getElementById("texto");
+            texto.value = select.value;
+        }
+
+        // Copia a frase para a área de transferência
+        function copiarTexto() {
+            const texto = document.getElementById("texto");
+            texto.select();
+            navigator.clipboard.writeText(texto.value).then(() => {
+                alert("Texto copiado com sucesso!");
+            }).catch(() => {
+                alert("Erro ao copiar o texto. Por favor, tente novamente.");
+            });
+        }
+
+        // Carrega as frases ao abrir a página
+        carregarFrases();
+    </script>
+</body>
+</html>
