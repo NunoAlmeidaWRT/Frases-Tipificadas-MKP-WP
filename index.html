@@ -6,57 +6,128 @@
     <title>Frases Tipificadas Marketplace Worten Peças</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #0f93f5;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
         select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
+            border: 2px solid #0f93f5;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
         }
+
+        select:focus {
+            border-color: #f59e0f;
+            outline: none;
+        }
+
         textarea {
             width: 100%;
             height: 200px;
-            padding: 10px;
+            padding: 12px;
             font-size: 14px;
+            border: 2px solid #0f93f5;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #333;
+            resize: none;
+            transition: border-color 0.3s ease;
         }
+
+        textarea:focus {
+            border-color: #f59e0f;
+            outline: none;
+        }
+
         button {
             display: block;
-            margin: 10px 0;
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
             font-size: 16px;
+            color: #fff;
+            background-color: #0f93f5;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f59e0f;
+        }
+
+        button:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
-    <h1>Frases Tipificadas Marketplace Worten Peças</h1>
-    <label for="frases">Escolha uma frase:</label>
-    <select id="frases" onchange="mostrarFrase()">
-        <option value="">Selecione...</option>
-        <option value="atraso">Atraso da encomenda</option>
-        <option value="comp-negativa">Compatibilidade negativa</option>
-        <option value="previsao">Previsão de entrega</option>
-        <option value="comp-positiva">Resposta compatibilidade positiva</option>
-        <option value="danificada">Encomenda entregue danificada</option>
-        <option value="devolucao">Pedido de devolução encomenda</option>
-        <option value="expedida">Encomenda expedida</option>
-        <option value="descontinuada">Encomenda descontinuada</option>
-        <option value="esgotada">Encomenda esgotada</option>
-        <option value="fatura-envio">Solicitação de fatura antes de envio</option>
-        <option value="recolha">Recolha Agendada</option>
-        <option value="prazo">Cliente solicita prazo de entrega</option>
-        <option value="cancelamento">Cliente solicita cancelamento antes de envio</option>
-        <option value="orientacoes">Orientações para indicação de modelo</option>
-        <option value="fatura-pos">Pedidos fatura após envio</option>
-        <option value="tracking">Falha comunicação tracking</option>
-        <option value="finalizado">Agradecimento ao cliente pelo feedback</option>
-        <option value="nota-credito">Solicitação via Email Emissão Nota de crédito a DGA</option>
-        <option value="link-resposta">Envio link resposta a solicitação de peça</option>
-        <option value="dimensões">Cliente solicita medidas/dimensões</option>
-    </select>
-    <textarea id="texto" readonly></textarea>
-    <button onclick="copiarTexto()">Copiar Frase</button>
+    <div class="container">
+        <h1>Frases Tipificadas Marketplace Worten Peças</h1>
+        <label for="frases">Escolha uma frase:</label>
+        <select id="frases" onchange="mostrarFrase()">
+            <option value="">Selecione...</option>
+            <option value="atraso">Atraso da encomenda</option>
+            <option value="comp-negativa">Compatibilidade negativa</option>
+            <option value="previsao">Previsão de entrega</option>
+            <option value="comp-positiva">Resposta compatibilidade positiva</option>
+            <option value="danificada">Encomenda entregue danificada</option>
+            <option value="devolucao">Pedido de devolução encomenda</option>
+            <option value="expedida">Encomenda expedida</option>
+            <option value="descontinuada">Encomenda descontinuada</option>
+            <option value="esgotada">Encomenda esgotada</option>
+            <option value="fatura-envio">Solicitação de fatura antes de envio</option>
+            <option value="recolha">Recolha Agendada</option>
+            <option value="prazo">Cliente solicita prazo de entrega</option>
+            <option value="cancelamento">Cliente solicita cancelamento antes de envio</option>
+            <option value="orientacoes">Orientações para indicação de modelo</option>
+            <option value="fatura-pos">Pedidos fatura após envio</option>
+            <option value="tracking">Falha comunicação tracking</option>
+            <option value="finalizado">Agradecimento ao cliente pelo feedback</option>
+            <option value="nota-credito">Solicitação via Email Emissão Nota de crédito a DGA</option>
+            <option value="link-resposta">Envio link resposta a solicitação de peça</option>
+            <option value="dimensões">Cliente solicita medidas/dimensões</option>
+        </select>
+        <textarea id="texto" readonly></textarea>
+        <button onclick="copiarTexto()">Copiar Frase</button>
+    </div>
 
     <script>
         const frases = {
@@ -257,7 +328,7 @@ IBAN: Marketplace
 Valor: €
  
 Agradeço desde já a atenção e fico a aguardar confirmação.`,
-"link-resposta": `Estimado(a) cliente,
+            "link-resposta": `Estimado(a) cliente,
 
 Agradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.
 
@@ -285,7 +356,6 @@ Estamos à disposição para qualquer esclarecimento adicional.
 
 Com os melhores cumprimentos,
 A Equipa Worten Peças`,
-
         };
 
         function mostrarFrase() {
