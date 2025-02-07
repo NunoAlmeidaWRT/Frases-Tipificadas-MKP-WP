@@ -5,29 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Frases</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
-        label, textarea, input, button { display: block; margin-top: 10px; width: 100%; }
-        textarea { height: 100px; }
-        button { padding: 10px; background: #0f93f5; color: white; border: none; cursor: pointer; }
-        button:hover { background: #0d82d4; }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f93f5, #f59e0f);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #0f93f5;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        label, input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            border-color: #0f93f5;
+            outline: none;
+        }
+        button {
+            background-color: #f59e0f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #e08e0d;
+        }
+        .frase-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .edit-button, .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .edit-button {
+            background-color: #0f93f5;
+        }
     </style>
 </head>
 <body>
-    <h1>Gestão de Frases</h1>
-    <label for="tipo">Tipo:</label>
-    <input type="text" id="tipo">
-    
-    <label for="mensagem">Mensagem:</label>
-    <textarea id="mensagem"></textarea>
-    
-    <button onclick="adicionarFrase()">Adicionar</button>
-    <button onclick="exportarJSON()">Exportar JSON</button>
-    
-    <h2>Frases Existentes</h2>
-    <ul id="listaFrases"></ul>
+    <div class="container">
+        <h1>Gestão de Frases</h1>
+        <label for="tipo">Tipo:</label>
+        <input type="text" id="tipo">
+        
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem"></textarea>
+        
+        <button onclick="adicionarOuAtualizarFrase()">Salvar</button>
+        
+        <h2>Frases Existentes</h2>
+        <div id="listaFrases"></div>
+    </div>
     
     <script>
         let frases = [];
+        let editIndex = -1;
         const jsonUrl = "https://raw.githubusercontent.com/NunoAlmeidaWRT/Frases-Tipificadas-MKP-WP/main/mensagens.json";
 
         async function carregarFrases() {
@@ -40,16 +106,26 @@
             }
         }
         
-        function adicionarFrase() {
+        function adicionarOuAtualizarFrase() {
             const tipo = document.getElementById("tipo").value;
             const mensagem = document.getElementById("mensagem").value;
             
             if (tipo && mensagem) {
-                frases.push({ tipo, mensagem });
+                if (editIndex === -1) {
+                    frases.push({ tipo, mensagem });
+                } else {
+                    frases[editIndex] = { tipo, mensagem };
+                    editIndex = -1;
+                }
                 atualizarLista();
-                document.getElementById("tipo").value = "";
-                document.getElementById("mensagem").value = "";
+                limparCampos();
             }
+        }
+        
+        function editarFrase(index) {
+            document.getElementById("tipo").value = frases[index].tipo;
+            document.getElementById("mensagem").value = frases[index].mensagem;
+            editIndex = index;
         }
         
         function removerFrase(index) {
@@ -61,22 +137,18 @@
             const lista = document.getElementById("listaFrases");
             lista.innerHTML = "";
             frases.forEach((frase, index) => {
-                const li = document.createElement("li");
-                li.textContent = `${frase.tipo}: ${frase.mensagem.substring(0, 50)}...`;
-                const botao = document.createElement("button");
-                botao.textContent = "Remover";
-                botao.onclick = () => removerFrase(index);
-                li.appendChild(botao);
-                lista.appendChild(li);
+                const div = document.createElement("div");
+                div.className = "frase-item";
+                div.innerHTML = `<span>${frase.tipo}: ${frase.mensagem.substring(0, 30)}...</span>
+                                 <button class="edit-button" onclick="editarFrase(${index})">Editar</button>
+                                 <button class="delete-button" onclick="removerFrase(${index})">Remover</button>`;
+                lista.appendChild(div);
             });
         }
         
-        function exportarJSON() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(frases, null, 2));
-            const a = document.createElement("a");
-            a.href = dataStr;
-            a.download = "mensagens.json";
-            a.click();
+        function limparCampos() {
+            document.getElementById("tipo").value = "";
+            document.getElementById("mensagem").value = "";
         }
         
         carregarFrases();
