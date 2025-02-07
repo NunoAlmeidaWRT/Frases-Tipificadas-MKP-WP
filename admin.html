@@ -30,6 +30,12 @@
             margin-bottom: 20px;
             font-size: 28px;
         }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
         label, input, textarea, button {
             width: 100%;
             padding: 12px;
@@ -38,6 +44,7 @@
             border: 2px solid #ddd;
             border-radius: 8px;
             transition: border-color 0.3s ease;
+            text-align: center;
         }
         input:focus, textarea:focus {
             border-color: #0f93f5;
@@ -84,13 +91,16 @@
 <body>
     <div class="container">
         <h1>Gestão de Frases</h1>
-        <label for="tipo">Tipo:</label>
-        <input type="text" id="tipo">
-        
-        <label for="mensagem">Mensagem:</label>
-        <textarea id="mensagem"></textarea>
+        <div class="form-group">
+            <label for="tipo">Tipo:</label>
+            <input type="text" id="tipo">
+            
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem"></textarea>
+        </div>
         
         <button onclick="adicionarOuAtualizarFrase()">Salvar</button>
+        <button onclick="exportarJSON()">Exportar JSON</button>
         
         <h2>Frases Existentes</h2>
         <div id="listaFrases"></div>
@@ -148,19 +158,16 @@
                 div.innerHTML = `<span>${frase.tipo}: ${frase.mensagem.substring(0, 30)}...</span>
                                  <button class="edit-button" onclick="editarFrase(${index})">Editar</button>
                                  <button class="delete-button" onclick="removerFrase(${index})">Remover</button>`;
-                div.ondragstart = (e) => {
-                    e.dataTransfer.setData("text/plain", index);
-                };
-                div.ondragover = (e) => e.preventDefault();
-                div.ondrop = (e) => {
-                    e.preventDefault();
-                    const draggedIndex = e.dataTransfer.getData("text/plain");
-                    const draggedItem = frases.splice(draggedIndex, 1)[0];
-                    frases.splice(index, 0, draggedItem);
-                    atualizarLista();
-                };
                 lista.appendChild(div);
             });
+        }
+        
+        function exportarJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(frases, null, 2));
+            const a = document.createElement("a");
+            a.href = dataStr;
+            a.download = "mensagens.json";
+            a.click();
         }
         
         function limparCampos() {
