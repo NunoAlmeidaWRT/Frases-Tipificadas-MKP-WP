@@ -51,8 +51,10 @@
             outline: none;
         }
         textarea {
-            resize: vertical;
-            min-height: 100px;
+            resize: none; /* Desabilita o redimensionamento manual */
+            min-height: 50px; /* Altura mínima inicial */
+            max-height: 200px; /* Altura máxima para evitar que cresça indefinidamente */
+            overflow-y: hidden; /* Esconde a barra de rolagem vertical */
         }
         button {
             background-color: #f59e0f;
@@ -99,7 +101,7 @@
             <textarea id="mensagem"></textarea>
 
             <label for="notas">Notas:</label>
-            <input type="text" id="notas">
+            <textarea id="notas"></textarea>
         </div>
         
         <button onclick="adicionarOuAtualizarFrase()">Salvar</button>
@@ -145,6 +147,7 @@
             document.getElementById("tipo").value = frases[index].tipo;
             document.getElementById("mensagem").value = frases[index].mensagem;
             document.getElementById("notas").value = frases[index].notas || "";
+            ajustarAlturaTextarea(document.getElementById("notas")); // Ajusta a altura do textarea das notas
             editIndex = index;
         }
         
@@ -197,6 +200,11 @@
             a.href = dataStr;
             a.download = "mensagens.json";
             a.click();
+        }
+        
+        function ajustarAlturaTextarea(textarea) {
+            textarea.style.height = "auto"; // Redefine a altura para o mínimo
+            textarea.style.height = textarea.scrollHeight + "px"; // Ajusta a altura ao conteúdo
         }
         
         function limparCampos() {
