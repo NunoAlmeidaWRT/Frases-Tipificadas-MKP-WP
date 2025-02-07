@@ -58,10 +58,10 @@
         }
 
         textarea {
-            resize: none; /* Desabilita o redimensionamento manual */
-            min-height: 50px; /* Altura mínima inicial */
-            max-height: 200px; /* Altura máxima para evitar que cresça indefinidamente */
-            overflow-y: hidden; /* Esconde a barra de rolagem vertical */
+            resize: vertical; /* Permite redimensionamento vertical */
+            min-height: 100px; /* Altura mínima maior */
+            max-height: 300px; /* Altura máxima maior */
+            overflow-y: auto; /* Adiciona barra de rolagem vertical se necessário */
         }
 
         button {
@@ -105,6 +105,7 @@
         </select>
         <label for="notas">Notas:</label>
         <textarea id="notas" readonly></textarea>
+        <label for="texto">Mensagem:</label>
         <textarea id="texto" readonly></textarea>
         <button onclick="copiarTexto()">Copiar Frase</button>
     </div>
@@ -141,6 +142,7 @@
             texto.value = select.value;
             notas.value = select.options[select.selectedIndex].dataset.notas; // Atualiza as notas
             ajustarAlturaTextarea(notas); // Ajusta a altura do textarea das notas
+            ajustarAlturaTextarea(texto); // Ajusta a altura do textarea da mensagem
         }
 
         function ajustarAlturaTextarea(textarea) {
