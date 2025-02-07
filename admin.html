@@ -155,11 +155,32 @@
                 const div = document.createElement("div");
                 div.className = "frase-item";
                 div.draggable = true;
+                div.dataset.index = index;
                 div.innerHTML = `<span>${frase.tipo}: ${frase.mensagem.substring(0, 30)}...</span>
                                  <button class="edit-button" onclick="editarFrase(${index})">Editar</button>
                                  <button class="delete-button" onclick="removerFrase(${index})">Remover</button>`;
+                div.addEventListener("dragstart", dragStart);
+                div.addEventListener("dragover", dragOver);
+                div.addEventListener("drop", drop);
                 lista.appendChild(div);
             });
+        }
+        
+        function dragStart(event) {
+            event.dataTransfer.setData("text/plain", event.target.dataset.index);
+        }
+        
+        function dragOver(event) {
+            event.preventDefault();
+        }
+        
+        function drop(event) {
+            event.preventDefault();
+            const draggedIndex = event.dataTransfer.getData("text/plain");
+            const targetIndex = event.target.closest(".frase-item").dataset.index;
+            const draggedItem = frases.splice(draggedIndex, 1)[0];
+            frases.splice(targetIndex, 0, draggedItem);
+            atualizarLista();
         }
         
         function exportarJSON() {
