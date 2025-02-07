@@ -21,7 +21,7 @@
   },
   {
     "tipo": "Pedido de devolução encomenda",
-    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que já iniciamos o processo de reembolso. \nPoderá devolver o artigo numa das nossas lojas Worten. Em alternativa, poderá enviar o artigo para o nosso armazém logístico na seguinte morada:\n\nSatfiel SFU\nRua Central de S. Martinho, 2990\n4560-805 Penafiel\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
+    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nPoderá devolver o artigo numa das nossas lojas Worten. Em alternativa, poderá enviar o artigo para o nosso armazém logístico na seguinte morada:\n\nSatfiel SFU\nRua Central de S. Martinho, 2990\n4560-805 Penafiel\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
   },
   {
     "tipo": "Encomenda expedida",
