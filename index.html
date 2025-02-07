@@ -41,18 +41,18 @@
             color: #555;
         }
 
-        select, textarea, button {
-            box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
-            width: 100%; /* Ocupa 100% da largura do contêiner */
+        select, textarea, button, input {
+            box-sizing: border-box;
+            width: 100%;
             padding: 12px;
-            margin: 0 0 20px 0; /* Remove margens laterais */
+            margin: 0 0 20px 0;
             font-size: 16px;
             border: 2px solid #ddd;
             border-radius: 8px;
             transition: border-color 0.3s ease;
         }
 
-        select:focus, textarea:focus {
+        select:focus, textarea:focus, input:focus {
             border-color: #0f93f5;
             outline: none;
         }
@@ -90,7 +90,7 @@
                 font-size: 24px;
             }
 
-            select, textarea, button {
+            select, textarea, button, input {
                 font-size: 14px;
             }
         }
@@ -103,6 +103,8 @@
         <select id="frases" onchange="mostrarFrase()">
             <option value="">Selecione...</option>
         </select>
+        <label for="notas">Notas:</label>
+        <input type="text" id="notas" readonly>
         <textarea id="texto" readonly></textarea>
         <button onclick="copiarTexto()">Copiar Frase</button>
     </div>
@@ -123,6 +125,7 @@
                     const option = document.createElement("option");
                     option.value = frase.mensagem;
                     option.textContent = frase.tipo;
+                    option.dataset.notas = frase.notas || ""; // Adiciona as notas ao option
                     select.appendChild(option);
                 });
             } catch (error) {
@@ -134,7 +137,9 @@
         function mostrarFrase() {
             const select = document.getElementById("frases");
             const texto = document.getElementById("texto");
+            const notas = document.getElementById("notas");
             texto.value = select.value;
+            notas.value = select.options[select.selectedIndex].dataset.notas; // Atualiza as notas
         }
 
         function copiarTexto() {
