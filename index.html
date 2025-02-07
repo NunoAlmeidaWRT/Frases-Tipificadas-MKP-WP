@@ -42,9 +42,10 @@
         }
 
         select, textarea, button {
-            width: calc(100% - 24px); /* Ajusta a largura para compensar o padding */
+            box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+            width: 100%; /* Ocupa 100% da largura do contêiner */
             padding: 12px;
-            margin: 0 12px 20px 12px; /* Adiciona margens laterais consistentes */
+            margin: 0 0 20px 0; /* Remove margens laterais */
             font-size: 16px;
             border: 2px solid #ddd;
             border-radius: 8px;
