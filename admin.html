@@ -168,6 +168,7 @@
         
         function dragStart(event) {
             event.dataTransfer.setData("text/plain", event.target.dataset.index);
+            event.target.style.opacity = "0.5";
         }
         
         function dragOver(event) {
@@ -176,11 +177,13 @@
         
         function drop(event) {
             event.preventDefault();
-            const draggedIndex = event.dataTransfer.getData("text/plain");
-            const targetIndex = event.target.closest(".frase-item").dataset.index;
-            const draggedItem = frases.splice(draggedIndex, 1)[0];
-            frases.splice(targetIndex, 0, draggedItem);
-            atualizarLista();
+            const draggedIndex = parseInt(event.dataTransfer.getData("text/plain"));
+            const targetIndex = parseInt(event.target.closest(".frase-item").dataset.index);
+            if (!isNaN(draggedIndex) && !isNaN(targetIndex) && draggedIndex !== targetIndex) {
+                const draggedItem = frases.splice(draggedIndex, 1)[0];
+                frases.splice(targetIndex, 0, draggedItem);
+                atualizarLista();
+            }
         }
         
         function exportarJSON() {
