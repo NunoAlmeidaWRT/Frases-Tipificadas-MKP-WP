@@ -42,9 +42,9 @@
         }
 
         select, textarea, button {
-            width: 100%;
+            width: calc(100% - 24px); /* Ajusta a largura para compensar o padding */
             padding: 12px;
-            margin-bottom: 20px;
+            margin: 0 12px 20px 12px; /* Adiciona margens laterais consistentes */
             font-size: 16px;
             border: 2px solid #ddd;
             border-radius: 8px;
@@ -61,9 +61,6 @@
             resize: vertical;
             min-height: 150px;
             max-height: 500px;
-            margin-left: 10px; /* Adiciona margem à esquerda */
-            margin-right: 10px; /* Adiciona margem à direita */
-            width: calc(100% - 20px); /* Reduz a largura para acomodar as margens */
         }
 
         button {
