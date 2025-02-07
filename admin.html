@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Frases</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+        label, textarea, input, button { display: block; margin-top: 10px; width: 100%; }
+        textarea { height: 100px; }
+        button { padding: 10px; background: #0f93f5; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0d82d4; }
+    </style>
+</head>
+<body>
+    <h1>Gestão de Frases</h1>
+    <label for="tipo">Tipo:</label>
+    <input type="text" id="tipo">
+    
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem"></textarea>
+    
+    <button onclick="adicionarFrase()">Adicionar</button>
+    <button onclick="exportarJSON()">Exportar JSON</button>
+    
+    <h2>Frases Existentes</h2>
+    <ul id="listaFrases"></ul>
+    
+    <script>
+        let frases = [];
+        const jsonUrl = "https://raw.githubusercontent.com/NunoAlmeidaWRT/Frases-Tipificadas-MKP-WP/main/mensagens.json";
+
+        async function carregarFrases() {
+            try {
+                const response = await fetch(jsonUrl);
+                frases = await response.json();
+                atualizarLista();
+            } catch (error) {
+                console.error("Erro ao carregar frases", error);
+            }
+        }
+        
+        function adicionarFrase() {
+            const tipo = document.getElementById("tipo").value;
+            const mensagem = document.getElementById("mensagem").value;
+            
+            if (tipo && mensagem) {
+                frases.push({ tipo, mensagem });
+                atualizarLista();
+                document.getElementById("tipo").value = "";
+                document.getElementById("mensagem").value = "";
+            }
+        }
+        
+        function removerFrase(index) {
+            frases.splice(index, 1);
+            atualizarLista();
+        }
+        
+        function atualizarLista() {
+            const lista = document.getElementById("listaFrases");
+            lista.innerHTML = "";
+            frases.forEach((frase, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${frase.tipo}: ${frase.mensagem.substring(0, 50)}...`;
+                const botao = document.createElement("button");
+                botao.textContent = "Remover";
+                botao.onclick = () => removerFrase(index);
+                li.appendChild(botao);
+                lista.appendChild(li);
+            });
+        }
+        
+        function exportarJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(frases, null, 2));
+            const a = document.createElement("a");
+            a.href = dataStr;
+            a.download = "mensagens.json";
+            a.click();
+        }
+        
+        carregarFrases();
+    </script>
+</body>
+</html>
