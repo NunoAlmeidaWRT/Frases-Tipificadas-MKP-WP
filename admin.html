@@ -51,10 +51,10 @@
             outline: none;
         }
         textarea {
-            resize: none; /* Desabilita o redimensionamento manual */
-            min-height: 50px; /* Altura mínima inicial */
-            max-height: 200px; /* Altura máxima para evitar que cresça indefinidamente */
-            overflow-y: hidden; /* Esconde a barra de rolagem vertical */
+            resize: vertical; /* Permite redimensionamento vertical */
+            min-height: 100px; /* Altura mínima maior */
+            max-height: 300px; /* Altura máxima maior */
+            overflow-y: auto; /* Adiciona barra de rolagem vertical se necessário */
         }
         button {
             background-color: #f59e0f;
@@ -148,6 +148,7 @@
             document.getElementById("mensagem").value = frases[index].mensagem;
             document.getElementById("notas").value = frases[index].notas || "";
             ajustarAlturaTextarea(document.getElementById("notas")); // Ajusta a altura do textarea das notas
+            ajustarAlturaTextarea(document.getElementById("mensagem")); // Ajusta a altura do textarea da mensagem
             editIndex = index;
         }
         
