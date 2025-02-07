@@ -97,6 +97,9 @@
             
             <label for="mensagem">Mensagem:</label>
             <textarea id="mensagem"></textarea>
+
+            <label for="notas">Notas:</label>
+            <input type="text" id="notas">
         </div>
         
         <button onclick="adicionarOuAtualizarFrase()">Salvar</button>
@@ -124,12 +127,13 @@
         function adicionarOuAtualizarFrase() {
             const tipo = document.getElementById("tipo").value;
             const mensagem = document.getElementById("mensagem").value;
+            const notas = document.getElementById("notas").value;
             
             if (tipo && mensagem) {
                 if (editIndex === -1) {
-                    frases.push({ tipo, mensagem });
+                    frases.push({ tipo, mensagem, notas });
                 } else {
-                    frases[editIndex] = { tipo, mensagem };
+                    frases[editIndex] = { tipo, mensagem, notas };
                     editIndex = -1;
                 }
                 atualizarLista();
@@ -140,6 +144,7 @@
         function editarFrase(index) {
             document.getElementById("tipo").value = frases[index].tipo;
             document.getElementById("mensagem").value = frases[index].mensagem;
+            document.getElementById("notas").value = frases[index].notas || "";
             editIndex = index;
         }
         
@@ -197,6 +202,7 @@
         function limparCampos() {
             document.getElementById("tipo").value = "";
             document.getElementById("mensagem").value = "";
+            document.getElementById("notas").value = "";
         }
         
         carregarFrases();
