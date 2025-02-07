@@ -13,7 +13,7 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: flex-star;
+            align-items: flex-start;
             min-height: 100vh;
             padding-top: 50px;
         }
@@ -57,8 +57,10 @@
         }
 
         textarea {
-            height: 150px;
-            resize: none;
+            height: 250px;
+            resize: vertical;
+            min-height: 150px;
+            max-height: 500px;
         }
 
         button {
@@ -105,9 +107,8 @@
     </div>
 
     <script>
-        const jsonUrl = "https://raw.githubusercontent.com/NunoAlmeidaWRT/Frases-Tipificadas-MKP-WP/main/mensagens.json"; // URL do JSON no GitHub
+        const jsonUrl = "https://raw.githubusercontent.com/NunoAlmeidaWRT/Frases-Tipificadas-MKP-WP/main/mensagens.json";
 
-        // Busca as frases do JSON
         async function carregarFrases() {
             try {
                 const response = await fetch(jsonUrl);
@@ -129,14 +130,12 @@
             }
         }
 
-        // Exibe a frase selecionada
         function mostrarFrase() {
             const select = document.getElementById("frases");
             const texto = document.getElementById("texto");
             texto.value = select.value;
         }
 
-        // Copia a frase para a área de transferência
         function copiarTexto() {
             const texto = document.getElementById("texto");
             texto.select();
@@ -147,7 +146,6 @@
             });
         }
 
-        // Carrega as frases ao abrir a página
         carregarFrases();
     </script>
 </body>
