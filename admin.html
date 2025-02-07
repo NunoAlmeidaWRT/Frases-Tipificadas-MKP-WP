@@ -43,6 +43,10 @@
             border-color: #0f93f5;
             outline: none;
         }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
         button {
             background-color: #f59e0f;
             color: white;
@@ -62,6 +66,7 @@
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 10px;
+            cursor: grab;
         }
         .edit-button, .delete-button {
             background-color: #e74c3c;
@@ -139,9 +144,21 @@
             frases.forEach((frase, index) => {
                 const div = document.createElement("div");
                 div.className = "frase-item";
+                div.draggable = true;
                 div.innerHTML = `<span>${frase.tipo}: ${frase.mensagem.substring(0, 30)}...</span>
                                  <button class="edit-button" onclick="editarFrase(${index})">Editar</button>
                                  <button class="delete-button" onclick="removerFrase(${index})">Remover</button>`;
+                div.ondragstart = (e) => {
+                    e.dataTransfer.setData("text/plain", index);
+                };
+                div.ondragover = (e) => e.preventDefault();
+                div.ondrop = (e) => {
+                    e.preventDefault();
+                    const draggedIndex = e.dataTransfer.getData("text/plain");
+                    const draggedItem = frases.splice(draggedIndex, 1)[0];
+                    frases.splice(index, 0, draggedItem);
+                    atualizarLista();
+                };
                 lista.appendChild(div);
             });
         }
