@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Frases</title>
+    <title>Frases Tipificadas Marketplace WRT</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,9 +13,11 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-star;
             min-height: 100vh;
+            padding-top: 50px;
         }
+
         .container {
             background: white;
             padding: 30px;
@@ -25,36 +27,40 @@
             max-width: 500px;
             text-align: center;
         }
+
         h1 {
             color: #0f93f5;
             margin-bottom: 20px;
             font-size: 28px;
         }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #555;
         }
-        label, input, textarea, button {
+
+        select, textarea, button {
             width: 100%;
             padding: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 16px;
             border: 2px solid #ddd;
             border-radius: 8px;
             transition: border-color 0.3s ease;
-            text-align: center;
         }
-        input:focus, textarea:focus {
+
+        select:focus, textarea:focus {
             border-color: #0f93f5;
             outline: none;
         }
+
         textarea {
-            resize: vertical;
-            min-height: 200px;
-            max-height: 500px;
+            height: 150px;
+            resize: none;
         }
+
         button {
             background-color: #f59e0f;
             color: white;
@@ -63,120 +69,85 @@
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
+
         button:hover {
             background-color: #e08e0d;
         }
-        .frase-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            cursor: grab;
+
+        button:active {
+            background-color: #d0800b;
         }
-        .edit-button, .delete-button {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .edit-button {
-            background-color: #0f93f5;
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            select, textarea, button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Gestão de Frases</h1>
-        <div class="form-group">
-            <label for="tipo">Tipo:</label>
-            <input type="text" id="tipo">
-            
-            <label for="mensagem">Mensagem:</label>
-            <textarea id="mensagem"></textarea>
-        </div>
-        
-        <button onclick="adicionarOuAtualizarFrase()">Salvar</button>
-        <button onclick="exportarJSON()">Exportar JSON</button>
-        
-        <h2>Frases Existentes</h2>
-        <div id="listaFrases"></div>
+        <h1>Frases Tipificadas Marketplace WRT</h1>
+        <label for="frases">Escolha uma frase:</label>
+        <select id="frases" onchange="mostrarFrase()">
+            <option value="">Selecione...</option>
+        </select>
+        <textarea id="texto" readonly></textarea>
+        <button onclick="copiarTexto()">Copiar Frase</button>
     </div>
-    
-    <script>
-        let frases = [];
-        let editIndex = -1;
-        const jsonUrl = "https://raw.githubusercontent.com/NunoAlmeidaWRT/Frases-Tipificadas-MKP-WP/main/mensagens.json";
 
+    <script>
+        const jsonUrl = "https://raw.githubusercontent.com/NunoAlmeidaWRT/Frases-Tipificadas-MKP-WP/main/mensagens.json"; // URL do JSON no GitHub
+
+        // Busca as frases do JSON
         async function carregarFrases() {
             try {
                 const response = await fetch(jsonUrl);
-                frases = await response.json();
-                atualizarLista();
-            } catch (error) {
-                console.error("Erro ao carregar frases", error);
-            }
-        }
-        
-        function adicionarOuAtualizarFrase() {
-            const tipo = document.getElementById("tipo").value;
-            const mensagem = document.getElementById("mensagem").value;
-            
-            if (tipo && mensagem) {
-                if (editIndex === -1) {
-                    frases.push({ tipo, mensagem });
-                } else {
-                    frases[editIndex] = { tipo, mensagem };
-                    editIndex = -1;
+                if (!response.ok) {
+                    throw new Error("Erro ao carregar as frases");
                 }
-                atualizarLista();
-                limparCampos();
+                const frases = await response.json();
+                const select = document.getElementById("frases");
+
+                frases.forEach(frase => {
+                    const option = document.createElement("option");
+                    option.value = frase.mensagem;
+                    option.textContent = frase.tipo;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error("Erro:", error);
+                alert("Erro ao carregar as frases. Verifique o console para mais detalhes.");
             }
         }
-        
-        function editarFrase(index) {
-            document.getElementById("tipo").value = frases[index].tipo;
-            document.getElementById("mensagem").value = frases[index].mensagem;
-            editIndex = index;
+
+        // Exibe a frase selecionada
+        function mostrarFrase() {
+            const select = document.getElementById("frases");
+            const texto = document.getElementById("texto");
+            texto.value = select.value;
         }
-        
-        function removerFrase(index) {
-            frases.splice(index, 1);
-            atualizarLista();
-        }
-        
-        function atualizarLista() {
-            const lista = document.getElementById("listaFrases");
-            lista.innerHTML = "";
-            frases.forEach((frase, index) => {
-                const div = document.createElement("div");
-                div.className = "frase-item";
-                div.draggable = true;
-                div.dataset.index = index;
-                div.innerHTML = `<span>${frase.tipo}: ${frase.mensagem.substring(0, 30)}...</span>
-                                 <button class="edit-button" onclick="editarFrase(${index})">Editar</button>
-                                 <button class="delete-button" onclick="removerFrase(${index})">Remover</button>`;
-                lista.appendChild(div);
+
+        // Copia a frase para a área de transferência
+        function copiarTexto() {
+            const texto = document.getElementById("texto");
+            texto.select();
+            navigator.clipboard.writeText(texto.value).then(() => {
+                alert("Texto copiado com sucesso!");
+            }).catch(() => {
+                alert("Erro ao copiar o texto. Por favor, tente novamente.");
             });
         }
-        
-        function exportarJSON() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(frases, null, 2));
-            const a = document.createElement("a");
-            a.href = dataStr;
-            a.download = "mensagens.json";
-            a.click();
-        }
-        
-        function limparCampos() {
-            document.getElementById("tipo").value = "";
-            document.getElementById("mensagem").value = "";
-        }
-        
+
+        // Carrega as frases ao abrir a página
         carregarFrases();
     </script>
 </body>
