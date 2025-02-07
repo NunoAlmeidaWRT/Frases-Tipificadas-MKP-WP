@@ -68,7 +68,7 @@
     "mensagem": "Estimado(a) cliente,\n\nAgradecemos o seu feedback, assim como a confiança depositada nos nossos serviços.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
   },
   {
-    "tipo": "Solicitação via Email Emissão Nota de crédito a DGA",
+    "tipo": "Solicitar Emissão Nota de crédito a DGA (Procedimento)",
     "mensagem": "(Enviar email para dga@satfiel.com)\nTitulo de Assunto: Pedido de Devolução Encomenda Marketplace Worten Nº\n\nBom dia,\n\nSolicito a emissão de uma nota de crédito para a seguinte encomenda:\n\nNome cliente: \nCanal: Marketplace Worten\nPedido: \nCód. Peça(s): \nMotivo: \nIBAN: Marketplace\nValor: €\n\nAgradeço desde já a atenção e fico a aguardar confirmação."
   },
   {
