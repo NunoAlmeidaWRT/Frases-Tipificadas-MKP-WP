@@ -82,5 +82,6 @@
   {
     "tipo": "Solicitar Emissão Nota de crédito a DGA (Procedimento)",
     "mensagem": "(As notas de crédito em Marketplace, apenas devem ser solicitadas ao DGA, nos casos em que o artigo já passou a fase de expedição. Pois o nosso sistema apenas emite fatura nesse momento. Antes dessa fase não existe fatura no sistema, como tal não existe necessidade de a creditar.)\n\nEnviar email para dga@satfiel.com\nTitulo de Assunto: Pedido de Devolução Encomenda Marketplace Worten Nº\n\nBom dia,\n\nSolicito a emissão de uma nota de crédito para a seguinte encomenda:\n\nNome cliente: \nCanal: Marketplace Worten\nPedido: \nCód. Peça(s): \nMotivo: \nIBAN: Marketplace\nValor: €\n\nAgradeço desde já a atenção e fico a aguardar confirmação."
+  "notas": "Verificar stock com o fornecedor antes de enviar a mensagem."
   }
 ]
