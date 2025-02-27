@@ -19,6 +19,11 @@
     "notas": ""
   },
   {
+    "tipo": "Compatibilidade negativa com alternativa",
+    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que o artigo não é compatível com o seu modelo de equipamento, enviamos abaixo o link do artigo correto:\n\nLINK\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças",
+    "notas": ""
+  },
+  {
     "tipo": "Compatibilidade negativa sem alternativa",
     "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que o artigo não é compatível com o seu modelo de equipamento, nem dispomos de alternativa para o mesmo.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças",
     "notas": ""
