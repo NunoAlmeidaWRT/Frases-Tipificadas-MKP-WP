@@ -1,19 +1,27 @@
 [
   {
-    "tipo": "Atraso da encomenda",
-    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInfelizmente a sua encomenda sofreu um atraso para além do esperado devido a rutura de stock do artigo no fabricante, contudo temos indicação que essa rutura já se encontrará solucionada tendo uma previsão estimada de entrega entre x a x de xxxxx na morada indicada.\n\nAgradecemos a sua compreensão e pedimos desculpa por qualquer transtorno causado devido a este atraso.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
-  },
-  {
-    "tipo": "Compatibilidade negativa",
-    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que o artigo não é compatível com o seu modelo de equipamento, nem dispomos de alternativa para o mesmo.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
+    "tipo": "Cliente solicita prazo de entrega (Info 3 semanas)",
+    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nLamentamos a demora no envio da sua encomenda, no entanto conforme é apresentado na página do artigo, o mesmo não está disponível para entrega imediata, tendo uma previsão de 3 semanas para entrega. Estando a aguardar chegada vinda do fabricante.\n\nTendo em conta a data da sua encomenda, estimamos que a mesma seja entregue xxx\n\nUma vez mais lamentamos a demora neste processo, agradecendo também toda sua compreensão.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças",
+    "notas": ""
   },
   {
     "tipo": "Previsão de entrega",
     "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nA previsão estimada de entrega da sua encomenda será entre x a x de xxxxx.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
   },
   {
-    "tipo": "Resposta compatibilidade positiva",
-    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que o acessório é compatível com o seu equipamento.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
+    "tipo": "Avisar Atraso da encomenda",
+    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInfelizmente a sua encomenda sofreu um atraso para além do esperado devido a rutura de stock do artigo no fabricante, contudo temos indicação que essa rutura já se encontrará solucionada tendo uma previsão estimada de entrega entre x a x de xxxxx na morada indicada.\n\nAgradecemos a sua compreensão e pedimos desculpa por qualquer transtorno causado devido a este atraso.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças",
+    "notas": ""
+  },
+  {
+    "tipo": "Compatibilidade positiva",
+    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que o acessório é compatível com o seu equipamento.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças",
+    "notas": ""
+  },
+  {
+    "tipo": "Compatibilidade negativa sem alternativa",
+    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que o artigo não é compatível com o seu modelo de equipamento, nem dispomos de alternativa para o mesmo.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças",
+    "notas": ""
   },
   {
     "tipo": "Encomenda entregue danificada",
@@ -44,10 +52,6 @@
     "mensagem": "Estimado(a) cliente,\n\nInformamos que foi agendada a recolha do pedido xxxxxx, com a transportadora XXX, para o dia xxx, tendo sido gerado o número de tracking xxxxx\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
   },
   {
-    "tipo": "Cliente solicita prazo de entrega",
-    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nLamentamos a demora no envio da sua encomenda, no entanto conforme é apresentado na página do artigo, o mesmo não está disponível para entrega imediata, tendo uma previsão de 3 semanas para entrega. Estando a aguardar chegada vinda do fabricante.\n\nTendo em conta a data da sua encomenda, estimamos que a mesma seja entregue xxx\n\nUma vez mais lamentamos a demora neste processo, agradecendo também toda sua compreensão.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
-  },
-  {
     "tipo": "Cliente solicita cancelamento antes de envio",
     "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nInformamos que já procedemos ao cancelamento da sua encomenda, assim como o reembolso da mesma.\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
   },
@@ -69,7 +73,8 @@
   },
   {
     "tipo": "Envio link resposta a solicitação de peça",
-    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nSegue abaixo o link para que possa verificar o preço e previsão de entrega do artigo que solicita:\n\nColocar link\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças"
+    "mensagem": "Estimado(a) cliente,\n\nAgradecemos desde já o seu contacto, que mereceu a nossa melhor atenção.\n\nSegue abaixo o link para que possa verificar o preço e previsão de entrega do artigo que solicita:\n\nColocar link\n\nEstamos à disposição para qualquer esclarecimento adicional.\n\nCom os melhores cumprimentos,\nA Equipa Worten Peças",
+    "notas": ""
   },
   {
     "tipo": "Medidas/Dimensões (Resposta Negativa)",
